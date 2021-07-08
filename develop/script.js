@@ -1,12 +1,3 @@
-/* 
-1. display the day at the top of the calendar -Done
-2. display time blocks of 1hr
-handle blcok clicks
-display save button 
-handle save button 
-handle refresh
-*/
-
 //TODO: get element using jquery
 const currentDayEl = document.getElementById("currentDay");
 
@@ -62,5 +53,4 @@ function addRow(time) {
 
 for (let i = 8; i < 19; i++) {
     addRow(i)
-    // console.log(i > 12 ? i-12 : i);
 }

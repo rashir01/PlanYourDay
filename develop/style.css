@@ -71,3 +71,8 @@ textarea {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
 }
+
+textarea:focus {
+  outline: none;
+  border: 5px solid #719ECE;
+}
