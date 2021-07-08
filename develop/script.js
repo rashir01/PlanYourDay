@@ -17,6 +17,7 @@ function addRow(time) {
     //create a row element
     let currentHour = moment().format("h");
     let presentState = "";
+    let timePostfix = ":00 AM";
     if(time < currentHour) {
         presentState = "past";
     } else if (time == currentHour) {
@@ -25,12 +26,19 @@ function addRow(time) {
         presentState = "future";
     }
 
+    if (time > 12) {
+        time = time - 12;
+        timePostfix = ":00 PM";
+    } else if (time == 12) {
+        timePostfix = ":00 PM";
+    }
+
     let rowEl = document.createElement("div");
     rowEl.classList.add("time-block", presentState, "row");
 
     let hourEl = document.createElement("div");
     hourEl.classList.add("hour","col-xl-1");
-    hourEl.textContent = time < 12 ? time + ":00 AM" : time +":00 PM";
+    hourEl.textContent = time + timePostfix;
 
     let textAreaEl = document.createElement("textarea");
     textAreaEl.classList.add("col-xl-10");
@@ -43,13 +51,6 @@ function addRow(time) {
     rowEl.appendChild(buttonEl);
 
     $(".container").append(rowEl);
-
-    //timeSlotContainerEl.appendChild(rowEl);
-    
-    //add time to row
-    //add text area to row
-    //add save button to row
-    
 }
 
 for (let i = 8; i < 19; i++) {
