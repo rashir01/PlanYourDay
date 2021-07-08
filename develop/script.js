@@ -6,6 +6,8 @@ display save button
 handle save button 
 handle refresh
 */
+
+//TODO: get element using jquery
 const currentDayEl = document.getElementById("currentDay");
 
 currentDayEl.textContent = moment().format("dddd, MMM Do");
