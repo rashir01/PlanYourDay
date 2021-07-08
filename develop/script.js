@@ -41,10 +41,17 @@ function addRow(time) {
     hourEl.textContent = time + timePostfix;
 
     let textAreaEl = document.createElement("textarea");
+    textAreaEl.value = localStorage.getItem("slot-" + time);
     textAreaEl.classList.add("col-xl-10");
+    
 
     let buttonEl = document.createElement("button");
     buttonEl.classList.add("saveBtn", "col-xl-1", "fas", "fa-save");
+    buttonEl.onclick = function (event) {
+        localStorage.setItem("slot-"+time, event.target.previousElementSibling.value )
+        console.log(event.target.previousElementSibling.value);
+        console.log(event.target);
+    };
 
     rowEl.appendChild(hourEl);
     rowEl.appendChild(textAreaEl);
