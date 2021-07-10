@@ -25,7 +25,7 @@ function addRow(time) {
     rowEl.classList.add("time-block", presentState, "row");
 
     let hourEl = document.createElement("div");
-    hourEl.classList.add("hour","col-2",  "col-l-1", "col-m-1", "col-xl-1");
+    hourEl.classList.add("hour","col-2", "col-md-1");
     hourEl.textContent = hourToDisplay;
 
     let textAreaEl = document.createElement("textarea");
@@ -34,7 +34,7 @@ function addRow(time) {
     
 
     let buttonEl = document.createElement("button");
-    buttonEl.classList.add("saveBtn", "col-2", "col-l-1", "col-m-1", "col-xl-1","fas", "fa-save");
+    buttonEl.classList.add("saveBtn","col-2",  "col-md-1","fas", "fa-save");
     buttonEl.onclick = function (event) {
         localStorage.setItem("slot-"+time, event.target.previousElementSibling.value )
         console.log(event.target.previousElementSibling.value);
