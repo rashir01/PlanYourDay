@@ -8,7 +8,6 @@ function addRow(time) {
     //create a row element
     let currentHour = moment().format("H");
     let presentState = "";
-    let timePostfix = ":00 AM";
     /*
     fix bug with pm time showing future
     */
@@ -20,19 +19,14 @@ function addRow(time) {
         presentState = "future";
     }
 
-    if (time > 12) {
-        time = time - 12;
-        timePostfix = ":00 PM";
-    } else if (time == 12) {
-        timePostfix = ":00 PM";
-    }
+    let hourToDisplay = moment(time, ["H"]).format("h:mm A");
 
     let rowEl = document.createElement("div");
     rowEl.classList.add("time-block", presentState, "row");
 
     let hourEl = document.createElement("div");
     hourEl.classList.add("hour","col-xl-1");
-    hourEl.textContent = time + timePostfix;
+    hourEl.textContent = hourToDisplay;
 
     let textAreaEl = document.createElement("textarea");
     textAreaEl.value = localStorage.getItem("slot-" + time);
