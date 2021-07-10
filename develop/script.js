@@ -6,9 +6,12 @@ currentDayEl.textContent = moment().format("dddd, MMM Do");
 function addRow(time) {
     //TODO: create the elements using jQuery
     //create a row element
-    let currentHour = moment().format("h");
+    let currentHour = moment().format("H");
     let presentState = "";
     let timePostfix = ":00 AM";
+    /*
+    fix bug with pm time showing future
+    */
     if(time < currentHour) {
         presentState = "past";
     } else if (time == currentHour) {
