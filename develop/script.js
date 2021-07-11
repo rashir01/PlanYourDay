@@ -5,6 +5,21 @@ const END_TIME = 19;
 
 currentDayEl.textContent = moment().format("dddd, MMM Do");
 
+/* 
+    Function determinesTimeState
+    purpose: given an input hour, the function will determine where it occurs in relation to the current hour
+    input: inputHour is the hour to compare to current hour
+    return: string: "past" if the input hour occurs before the current hour
+                    "present" if the input hour is the same as the current hour
+                    "future" if the input hour is ahead of the current hour
+*/
+function determineTimeState(inputHour) {
+    let currentHour = moment().format("H");
+    if (inputHour < currentHour) return "past";
+    if (inputHour == currentHour) return "present";
+    if (inputHour > currentHour) return "future";
+}
+
 function addRow(time) {
     //TODO: create the elements using jQuery
     //create a row element
@@ -13,13 +28,7 @@ function addRow(time) {
     /*
     fix bug with pm time showing future
     */
-    if(time < currentHour) {
-        presentState = "past";
-    } else if (time == currentHour) {
-        presentState = "present";
-    } else {
-        presentState = "future";
-    }
+    presentState = determineTimeState(time);
 
     let hourToDisplay = moment(time, ["H"]).format("h:mm A");
 
