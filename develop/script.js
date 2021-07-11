@@ -1,5 +1,7 @@
 //TODO: get element using jquery
 const currentDayEl = document.getElementById("currentDay");
+const START_TIME = 8;
+const END_TIME = 19;
 
 currentDayEl.textContent = moment().format("dddd, MMM Do");
 
@@ -48,6 +50,6 @@ function addRow(time) {
     $(".container").append(rowEl);
 }
 
-for (let i = 8; i < 19; i++) {
+for (let i = START_TIME; i < END_TIME; i++) {
     addRow(i)
 }
