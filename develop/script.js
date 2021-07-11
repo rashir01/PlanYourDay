@@ -28,7 +28,9 @@ function determineTimeState(inputHour) {
 */
 function createRowDiv(presentState) {
     let rowEl = document.createElement("div");
-    rowEl.classList.add("time-block", presentState, "row");
+    $(rowEl).prop({
+        class: "time-block row " + presentState
+    });
     return rowEl;
 }
 
