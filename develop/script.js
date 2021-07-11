@@ -46,15 +46,26 @@ function createHourElement(inputHour) {
     return hourEl;
 }
 
-function addRow(inputHour) {
-    let presentState = determineTimeState(inputHour);
-    let rowEl = createRowDiv(presentState);
-    //create row components (hour display, text area, and button)
-    let hourEl = createHourElement(inputHour);
-
+/*
+    Function: createTextAreaElement
+    Purpose: creates a text area element that reads from local storage to populate initially and is editable by the user
+    input: inputHour is a value that is used to read from local storage. Since the application will have multiple text areas, the current hour is used to distinguish between the elements 
+    returns: htmlElement representing the text area
+*/
+function createTextAreaElement(inputHour) {
     let textAreaEl = document.createElement("textarea");
     textAreaEl.value = localStorage.getItem("slot-" + inputHour);
     textAreaEl.classList.add("col");
+    console.log(textAreaEl);
+    return textAreaEl;
+}
+
+function addRow(inputHour) {
+    let presentState = determineTimeState(inputHour);
+    //create row with components (hour display, text area, and button)
+    let rowEl = createRowDiv(presentState);
+    let hourEl = createHourElement(inputHour);
+    let textAreaEl = createTextAreaElement(inputHour);
     
     let buttonEl = document.createElement("button");
     buttonEl.classList.add("saveBtn","col-2",  "col-md-1","fas", "fa-save");
