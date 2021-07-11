@@ -50,35 +50,49 @@ function createHourElement(inputHour) {
     Function: createTextAreaElement
     Purpose: creates a text area element that reads from local storage to populate initially and is editable by the user
     input: inputHour is a value that is used to read from local storage. Since the application will have multiple text areas, the current hour is used to distinguish between the elements 
-    returns: htmlElement representing the text area
+    returns: html tag representing the text area with text set to its corresponding storage value
 */
 function createTextAreaElement(inputHour) {
     let textAreaEl = document.createElement("textarea");
     textAreaEl.value = localStorage.getItem("slot-" + inputHour);
     textAreaEl.classList.add("col");
-    console.log(textAreaEl);
     return textAreaEl;
 }
 
-function addRow(inputHour) {
-    let presentState = determineTimeState(inputHour);
-    //create row with components (hour display, text area, and button)
-    let rowEl = createRowDiv(presentState);
-    let hourEl = createHourElement(inputHour);
-    let textAreaEl = createTextAreaElement(inputHour);
-    
+/*
+    Function: createButtonElement
+    Purpose: creates a button element to be attached to the time block row. It adds the necessary classes for the css display. It also has an onclick that saves the sibling text area to the local storage
+    input: inputHour the hour this button is associated with 
+    return: html tag representing the button
+*/
+function createButtonElement(inputHour) {
     let buttonEl = document.createElement("button");
-    buttonEl.classList.add("saveBtn","col-2",  "col-md-1","fas", "fa-save");
+    buttonEl.classList.add("saveBtn", "col-2", "col-md-1", "fas", "fa-save");
     buttonEl.onclick = function (event) {
         localStorage.setItem("slot-"+inputHour, event.target.previousElementSibling.value )
-
     };
+    return buttonEl;
+}
 
+/* 
+    Function: addRow
+    Purpose: adds a time block row to the screen
+    input: inputHour the time stamp to display in the row. The input is an integer that will be converted to clock format upon display
+    return: none
+*/
+function addRow(inputHour) {
+    //determine if the row should be in the past, present, or future
+    let presentState = determineTimeState(inputHour);
+    
+    //create row with components (hour display, text area, and button)
+    let rowEl = createRowDiv(presentState);
+    
+    //attach the components to the div
+    rowEl.appendChild(createHourElement(inputHour));
+    rowEl.appendChild(createTextAreaElement(inputHour));
+    rowEl.appendChild(createButtonElement(inputHour));
 
-    rowEl.appendChild(hourEl);
-    rowEl.appendChild(textAreaEl);
-    rowEl.appendChild(buttonEl);
-
+    //attach the div row to the container
     $(".container").append(rowEl);
 }
 
