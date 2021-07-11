@@ -41,8 +41,11 @@ function createRowDiv(presentState) {
 function createHourElement(inputHour) {
     let hourToDisplay = moment(inputHour, ["H"]).format("h:mm A");
     let hourEl = document.createElement("div");
-    hourEl.classList.add("hour","col-2", "col-md-1");
-    hourEl.textContent = hourToDisplay;
+    $(hourEl).text(hourToDisplay);
+    $(hourEl).prop({
+        class: "hour col-2 col-md-1"
+    });
+    
     return hourEl;
 }
 
@@ -54,8 +57,11 @@ function createHourElement(inputHour) {
 */
 function createTextAreaElement(inputHour) {
     let textAreaEl = document.createElement("textarea");
-    textAreaEl.value = localStorage.getItem("slot-" + inputHour);
-    textAreaEl.classList.add("col");
+    $(textAreaEl).text(localStorage.getItem("slot-" + inputHour));
+    $(textAreaEl).prop({
+        class: "col"
+    });
+
     return textAreaEl;
 }
 
@@ -67,10 +73,12 @@ function createTextAreaElement(inputHour) {
 */
 function createButtonElement(inputHour) {
     let buttonEl = document.createElement("button");
-    buttonEl.classList.add("saveBtn", "col-2", "col-md-1", "fas", "fa-save");
-    buttonEl.onclick = function (event) {
+    $(buttonEl).prop({
+        class: "saveBtn col-2 col-md-1 fas fa-save"
+    });
+    $(buttonEl).click (function (event) {
         localStorage.setItem("slot-"+inputHour, event.target.previousElementSibling.value )
-    };
+    });
     return buttonEl;
 }
 
@@ -88,9 +96,12 @@ function addRow(inputHour) {
     let rowEl = createRowDiv(presentState);
     
     //attach the components to the div
-    rowEl.appendChild(createHourElement(inputHour));
-    rowEl.appendChild(createTextAreaElement(inputHour));
-    rowEl.appendChild(createButtonElement(inputHour));
+    let hourEl = createHourElement(inputHour);
+    let textAreaEl = createTextAreaElement(inputHour);
+    let buttonEl = createButtonElement(inputHour);
+
+    $(rowEl).append(hourEl, textAreaEl, buttonEl);
+    
 
     //attach the div row to the container
     $(".container").append(rowEl);
