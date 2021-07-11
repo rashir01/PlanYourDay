@@ -32,22 +32,25 @@ function createRowDiv(presentState) {
     return rowEl;
 }
 
-function addRow(inputHour) {
-    /*
-    fix bug with pm time showing future
-    */
-    let presentState = determineTimeState(inputHour);
-
-    //format the input hour eg 9 to 9:00 AM 
+/*
+    Function: createHourElement
+    purpose: creates a div element that represents the hour. The hour is formatted eg 9 => 9:00 AM and 17 => 5:00 PM
+    input: the hour to show in the textContent of the div
+    return: htmlDivElement representing the the hour div with the required classes attched
+*/
+function createHourElement(inputHour) {
     let hourToDisplay = moment(inputHour, ["H"]).format("h:mm A");
-
-    //TODO: create the elements using jQuery
-
-    let rowEl = createRowDiv(presentState);
-
     let hourEl = document.createElement("div");
     hourEl.classList.add("hour","col-2", "col-md-1");
     hourEl.textContent = hourToDisplay;
+    return hourEl;
+}
+
+function addRow(inputHour) {
+    let presentState = determineTimeState(inputHour);
+    let rowEl = createRowDiv(presentState);
+    //create row components (hour display, text area, and button)
+    let hourEl = createHourElement(inputHour);
 
     let textAreaEl = document.createElement("textarea");
     textAreaEl.value = localStorage.getItem("slot-" + inputHour);
@@ -57,8 +60,7 @@ function addRow(inputHour) {
     buttonEl.classList.add("saveBtn","col-2",  "col-md-1","fas", "fa-save");
     buttonEl.onclick = function (event) {
         localStorage.setItem("slot-"+inputHour, event.target.previousElementSibling.value )
-        console.log(event.target.previousElementSibling.value);
-        console.log(event.target);
+
     };
 
 
