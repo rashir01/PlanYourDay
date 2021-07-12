@@ -25,7 +25,7 @@ A user can enter text into the text area and press the save button. Saved text w
 Use [Day Planner](https://rashir01.github.io/MyDayPlanner/) to access the day planner
 
 ## Screenshots
-![landing page with some events planned] (./assets/images/landingpage.png)
+![landing page with some events planned](./assets/images/landing.png)
 
 ---
 
