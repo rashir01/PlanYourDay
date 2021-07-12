@@ -22,7 +22,7 @@ A user can enter text into the text area and press the save button. Saved text w
 * script.js JavaScript to mainpulate and add the elements
 
 ## How to access
-Use [Day Planner](https://rashir01.github.io/MyDayPlanner/) to access the day planner
+Use [Day Planner](https://rashir01.github.io/PlanYourDay/) to access the day planner
 
 ## Screenshots
 ![landing page with some events planned](./assets/images/landing.png)
