@@ -59,7 +59,7 @@ function createHourElement(inputHour) {
 */
 function createTextAreaElement(inputHour) {
     let textAreaEl = document.createElement("textarea");
-    $(textAreaEl).text(localStorage.getItem("slot-" + inputHour));
+    $(textAreaEl).text(localStorage.getItem("slot-" + inputHour + moment().format("DDMMYY")));
     $(textAreaEl).prop({
         class: "col"
     });
@@ -79,7 +79,7 @@ function createButtonElement(inputHour) {
         class: "saveBtn col-2 col-md-1 fas fa-save"
     });
     $(buttonEl).click (function (event) {
-        localStorage.setItem("slot-"+inputHour, event.target.previousElementSibling.value )
+        localStorage.setItem("slot-"+ inputHour + moment().format("DDMMYY"), event.target.previousElementSibling.value )
     });
     return buttonEl;
 }
