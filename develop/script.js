@@ -1,9 +1,7 @@
-//TODO: get element using jquery
-const currentDayEl = document.getElementById("currentDay");
 const START_TIME = 8;
 const END_TIME = 19;
 
-currentDayEl.textContent = moment().format("dddd, MMM Do");
+$("#currentDay").val(moment().format("dddd, MMM Do"));
 
 /* 
     Function determinesTimeState
