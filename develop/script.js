@@ -1,7 +1,7 @@
 const START_TIME = 8;
 const END_TIME = 19;
 
-$("#currentDay").val(moment().format("dddd, MMM Do"));
+$("#currentDay").text(moment().format("dddd, MMM Do"));
 
 /* 
     Function determinesTimeState
