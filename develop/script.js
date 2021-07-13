@@ -19,20 +19,6 @@ function determineTimeState(inputHour) {
 }
 
 /*
-    Function createRowDiv
-    purpose: creates a div to be used as a row to which the time, text area, and button will attach
-    input: presentState is a string that will be added to the class list of the row. It will determine the css formatting for the row
-    return: htmlDivElement representing the row
-*/
-function createRowDiv(presentState) {
-    let rowEl = document.createElement("div");
-    $(rowEl).prop({
-        class: "time-block row " + presentState
-    });
-    return rowEl;
-}
-
-/*
     Function: createHourElement
     purpose: creates a div element that represents the hour. The hour is formatted eg 9 => 9:00 AM and 17 => 5:00 PM
     input: the hour to show in the textContent of the div
@@ -40,11 +26,8 @@ function createRowDiv(presentState) {
 */
 function createHourElement(inputHour) {
     let hourToDisplay = moment(inputHour, ["H"]).format("h:mm A");
-    let hourEl = document.createElement("div");
+    let hourEl = $("<div class=\"hour col-2 col-md-1\"></div>");
     $(hourEl).text(hourToDisplay);
-    $(hourEl).prop({
-        class: "hour col-2 col-md-1"
-    });
     
     return hourEl;
 }
@@ -56,11 +39,8 @@ function createHourElement(inputHour) {
     returns: html tag representing the text area with text set to its corresponding storage value
 */
 function createTextAreaElement(inputHour) {
-    let textAreaEl = document.createElement("textarea");
+    let textAreaEl = $("<textarea class=\"col\"></div>");
     $(textAreaEl).text(localStorage.getItem("slot-" + inputHour + moment().format("DDMMYY")));
-    $(textAreaEl).prop({
-        class: "col"
-    });
 
     return textAreaEl;
 }
@@ -72,12 +52,10 @@ function createTextAreaElement(inputHour) {
     return: html tag representing the button
 */
 function createButtonElement(inputHour) {
-    let buttonEl = document.createElement("button");
-    $(buttonEl).prop({
-        class: "saveBtn col-2 col-md-1 fas fa-save"
-    });
+    let buttonEl = $("<button class=\"saveBtn col-2 col-md-1 fas fa-save\"></button>");
     $(buttonEl).click (function (event) {
-        localStorage.setItem("slot-"+ inputHour + moment().format("DDMMYY"), event.target.previousElementSibling.value )
+        //append the hour and date to the local storage name so that it will not show prev day events
+        localStorage.setItem("slot-"+ inputHour + moment().format("DDMMYY"), event.target.previousElementSibling.value)
     });
     return buttonEl;
 }
@@ -93,7 +71,7 @@ function addRow(inputHour) {
     let presentState = determineTimeState(inputHour);
     
     //create row with components (hour display, text area, and button)
-    let rowEl = createRowDiv(presentState);
+    let rowEl = $("<div class=\"time-block row " + presentState + "\"></div>");
     
     //attach the components to the div
     let hourEl = createHourElement(inputHour);
