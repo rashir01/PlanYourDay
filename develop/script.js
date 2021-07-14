@@ -1,7 +1,6 @@
+//global variables
 const START_TIME = 8;
 const END_TIME = 19;
-
-$("#currentDay").text(moment().format("dddd, MMM Do"));
 
 /* 
     Function determinesTimeState
@@ -85,6 +84,12 @@ function addRow(inputHour) {
     $(".container").append(rowEl);
 }
 
+/*
+    program entry point: 
+        display the date
+        add time blocks
+*/
+$("#currentDay").text(moment().format("dddd, MMM Do"));
 for (let i = START_TIME; i < END_TIME; i++) {
     addRow(i)
 }
